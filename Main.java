@@ -7,6 +7,7 @@ public class Main extends Canvas implements Runnable{
     private Handler handler;
     private Thread thread;
     private HUD hud;
+    private BufferedImageLoader loader;
 
     //variables
     public static final int WIDTH = 1281;
@@ -14,6 +15,16 @@ public class Main extends Canvas implements Runnable{
     private boolean running = true;
 
     public Main(){
+        //bufferedimageloader
+        loader = new BufferedImageLoader();
+
+        //images
+        imageLoad = loader.loadImage("C:\\Users\\pc\\IdeaProjects\\ROADTRIP\\ROADTRIP\\src\\Images\\map.jpg");
+
+        Image image = new Image(imageLoad);
+
+        background = image.grabImage();
+        
         //window
         new Window(WIDTH, HEIGHT, "Naam game", this);
 
