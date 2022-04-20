@@ -10,11 +10,21 @@ public class Game extends Canvas implements Runnable{
 
     //instances
     private Handler handler;
+    private HUD hud;
 
     //constructor
     public Game(){
         handler = new Handler();
         new Window(WIDTH, HEIGHT, "Super Mario Bros", this);
+
+        //keylisteners
+        this.addKeyListener(new KeyInput(handler));
+
+        hud = new HUD();
+
+        //adding objects at startup program
+        handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player, handler));
+        handler.addObject(new Enemy(300, 300, ID.Enemy, handler));
     }
 
     public synchronized void start(){
@@ -33,6 +43,7 @@ public class Game extends Canvas implements Runnable{
 
     public void tick(){
         handler.tick();
+        hud.tick();
     }
 
     public void render(){
@@ -49,6 +60,7 @@ public class Game extends Canvas implements Runnable{
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
+        hud.render(g);
 
         g.dispose();
         bs.show();
@@ -82,6 +94,17 @@ public class Game extends Canvas implements Runnable{
             }
         }
         stop();
+    }
+
+    //clamp method: if the var is at the max, it stays at the max (same with the min)
+    public static float clamp(float var, float min, float max){
+        if(var >= max){
+            return var = max;
+        }else if(var <= min){
+            return var = min;
+        }else{
+            return var;
+        }
     }
 
     public static void main(String[] args) {
