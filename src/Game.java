@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+//hoi
+
 public class Game extends Canvas implements Runnable{
 
     public static final int WIDTH = 1800;
